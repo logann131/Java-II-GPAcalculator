@@ -1,3 +1,7 @@
+/* Nam Phu Nguyen (Logan)
+   CS141 
+   Programing Assignment
+ */ 
 import java.util.Scanner;
 /**
  * This class displays a menu of options to allow a user to perform operations on
