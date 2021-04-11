@@ -1,5 +1,5 @@
 /* Nam Phu Nguyen (Logan)
-   CS141 
+   IT220-JAVA II 
    Programing Assignment
  */ 
 import java.util.Scanner;
