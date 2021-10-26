@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class GradesClient {
 
     private final static String  ADD = "1", REMOVE = "2", DROP = "3", DISPLAY = "4", SORT = "5",
-            AVERAGE = "6", EXIT = "7";
+            AVERAGE = "6", PASSING="7", EXIT = "8";
     private static Scanner keyboard = new Scanner(System.in);
     private static Grades grades = new Grades();
 
@@ -63,6 +63,10 @@ public class GradesClient {
             {
                 client.calcAverage();
                 client.displayGrades();
+            }else if (choice.equals(PASSING))
+            {
+                client.passingGrades();
+//                client.displayGrades();
             }else if (choice.equals(EXIT))
             {
                 System.out.println("GoodBye");
@@ -125,11 +129,12 @@ public class GradesClient {
 
         double grade = keyboard.nextDouble();
 
-        boolean removed = grades.removeAllGrades(grade);
-        if(removed)
-            System.out.println("Removed grade = "+grade);
-        else
-            System.out.println("No grade,"+grade+", found to remove");
+        grades.removeAllGrades(grade);
+//        boolean removed = grades.removeAllGrades(grade);
+//        if(removed)
+//            System.out.println("Removed grade = "+grade);
+//        else
+//            System.out.println("No grade,"+grade+", found to remove");
     }
 
     private void dropLowest()
@@ -139,12 +144,16 @@ public class GradesClient {
 
     private void displayGrades()
     {
+    	
         System.out.println(grades);
     }
 
     private void displaySorted()
     {
         grades.printSortedGrades();
+    }
+    private void passingGrades() {
+    	
     }
 
 }

@@ -14,15 +14,19 @@ public class Grades {
         grades = new ArrayList<>();
     }
 
+    public double totalGrade() {
+    	double total = 0.0; 
+    	for (double num:this.grades) {
+    		total += num;
+    	}
+    	System.out.println("total is:" +total);
+    	return total;
+    }
+    
     public double calcAverage() { //calculate the average
 
-        //need a variable for total value
-        double total = 0.0;
-        for(int i=0; i<this.grades.size(); i++) {
-            total += this.grades.get(i);
-        }
         //calculation
-        double average = total / this.grades.size();
+        double average = totalGrade() / this.grades.size();
 
         return average;
     } // end calcAverage here
@@ -44,22 +48,38 @@ public class Grades {
     }
 
     public void addGrade(double grade) {
-        grades.add(grade); //.add() to add values
+    	if (grade < 0 && grade > 100) {
+    		System.out.println("Invalid input!");
+    	} else {
+    		grades.add(grade); //.add() to add values    		
+    	}
     }
 
     public boolean removeAllGrades (double grade) {
 
-        //create one boolean to use through out this method
-        boolean result = false;
-        for (int i=grades.size()-1; i>=0; i--) {
-            if (grades.get(i) == grade) {
-                grades.remove(i);
-                //return true if the grade was found
-                result = true;
-            }
-        }
-        //return false if the grade was not found
-        return result;
+    	if (grade <  0 && grade > 100) {
+    		System.out.println("Invalid input");
+    		return false;
+    	} else {
+    		//create one boolean to use through out this method
+    		boolean res = false;
+    		for (int i=grades.size()-1; i>=0; i--) {
+    			if (grades.get(i) == grade) {
+    				grades.remove(i);
+    				//return true if the grade was found
+    				res = true;
+    			}
+    		}
+    		if (res) {
+    			System.out.println("Removed grade = "+grade);
+    		} else {
+    			System.out.println("No grade,"+grade+", found to remove! Please try again!");
+    		}
+    		//return false if the grade was not found
+    		return res;
+    		
+    	}
+    	
 
     }
 
@@ -85,7 +105,27 @@ public class Grades {
         //print the ArrayList
         System.out.println(grades);
     }
+    
+    
+    //passingGrades
+    public void passingGrade(double a, double b) {
+    	double avg = calcAverage();
+    	if (avg < a) {
+    		double temp = totalGrade()+b;
+    		temp = temp / (grades.size() + 1);
+    		
+    		if (temp >= a) {
+    			System.out.println("Target average reached\n");
+    		} else {
+    			System.out.println("Not sufficient! Added grades!");
+    		}
+    	} else {
+    		System.out.println("Target average too low");
+    	}
+    }
 
+    
+    
     //override the Object's toString();
     @Override
     public String toString() {
