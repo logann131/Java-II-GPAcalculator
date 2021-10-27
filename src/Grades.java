@@ -10,7 +10,6 @@ public class Grades {
 
     //Default constructor
     public Grades() {
-
         grades = new ArrayList<>();
     }
 
@@ -33,18 +32,23 @@ public class Grades {
 
     public double dropLowest() {
 
-        //declare lowest variable = grades.get(0) then
-        //compare lowest to the rest of the ArrayList
-        double lowest = this.grades.get(0);
-        for (int i=1; i<this.grades.size(); i++) {
-            if (this.grades.get(i) < lowest) {
-                lowest = this.grades.get(i);
-            }
-        }
-        //remove only one lowest value
-        grades.remove(lowest);
-        //return the lowest value
-        return lowest;
+    	if (grades.size() == 0) {
+    		System.out.println("No grades to drop! Please add more grades"); 
+    		return 0;
+    	} else {
+	        //declare lowest variable = grades.get(0) then
+	        //compare lowest to the rest of the ArrayList
+	        double lowest = this.grades.get(0);
+	        for (int i=1; i<this.grades.size(); i++) {
+	            if (this.grades.get(i) < lowest) {
+	                lowest = this.grades.get(i);
+	            }
+	        }
+	        //remove only one lowest value
+	        grades.remove(lowest);
+	        //return the lowest value
+	        return lowest;
+    	}
     }
 
     public void addGrade(double grade) {
@@ -109,21 +113,53 @@ public class Grades {
     
     //passingGrades
     public void passingGrade(double a, double b) {
-    	double avg = calcAverage();
-    	if (avg < a) {
-    		double temp = totalGrade()+b;
-    		temp = temp / (grades.size() + 1);
-    		
-    		if (temp >= a) {
-    			System.out.println("Target average reached\n");
-    		} else {
-    			System.out.println("Not sufficient! Added grades!");
-    		}
+    	if (checkValid(a) || checkValid(b)) {
+    		System.out.println("Invalid input");
     	} else {
-    		System.out.println("Target average too low");
+	    	double avg = calcAverage();
+	    	if (avg < a) {
+	    		double temp = totalGrade()+b;
+	    		temp = temp / (grades.size() + 1);
+	    		
+	    		if (temp >= a) {
+	    			System.out.println("Target average reached\n");
+	    		} else {
+	    			System.out.println("Not sufficient! Added grades!");
+	    		}
+	    	} else {
+	    		System.out.println("Target average too low");
+	    	}
+	    }
+    }
+    public Boolean checkValid(double grade) {
+    	if (grade >= 0 && grade <= 100) {
+    		return false;
+    	} else {
+    		return true;
     	}
     }
+    
 
+    public void estimatedGPA(double test1Sc, double test2Sc, double midtermSc, double finalSc) {
+    	if (checkValid(test1Sc) || checkValid(test2Sc) || checkValid(midtermSc) || checkValid(finalSc)) {
+    		System.out.println("Invalid input");
+    	} else {
+    		double total = test1Sc + test2Sc + midtermSc + finalSc;
+    		double res = total/ 4;
+    		
+    		if (res > 90) {
+    			System.out.println("GPA: percentage - " + res + " letter - A" );
+    		} else if (res > 85 && res < 90) {
+    			System.out.println("GPA: percentage - " + res + " letter - B" );
+    		} else if (res > 80 && res < 85) {
+    			System.out.println("GPA: percentage - " + res + " letter - C" );
+    		} else if (res > 75 && res < 80) {
+    			System.out.println("GPA: percentage - " + res + " letter - D" );
+    		} else {
+    			System.out.println("GPA: percentage - " + res + "! You failed the course!" );
+    		}
+    	}
+    }
     
     
     //override the Object's toString();

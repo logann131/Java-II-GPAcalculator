@@ -2,6 +2,8 @@
    IT220-JAVA II 
    Programing Assignment
  */ 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 /**
  * This class displays a menu of options to allow a user to perform operations on
@@ -12,9 +14,10 @@ import java.util.Scanner;
 public class GradesClient {
 
     private final static String  ADD = "1", REMOVE = "2", DROP = "3", DISPLAY = "4", SORT = "5",
-            AVERAGE = "6", PASSING="7", EXIT = "8";
+            AVERAGE = "6", ESTIMATED = "7", PASSING = "8", EXIT="9";
     private static Scanner keyboard = new Scanner(System.in);
     private static Grades grades = new Grades();
+    
 
     /**
      * This method displays a list of menu options for the user to chose from and then performs
@@ -63,11 +66,14 @@ public class GradesClient {
             {
                 client.calcAverage();
                 client.displayGrades();
+            }else if (choice.equals(ESTIMATED))
+            {
+                client.estimatedGPA();
             }else if (choice.equals(PASSING))
             {
-                client.passingGrades();
-//                client.displayGrades();
-            }else if (choice.equals(EXIT))
+                client.passingGrade();
+            }
+            else if (choice.equals(EXIT))
             {
                 System.out.println("GoodBye");
 
@@ -87,11 +93,14 @@ public class GradesClient {
         System.out.println("*************************************");
         System.out.println("1. Add grade");
         System.out.println("2. Remove all grades");
-        System.out.println("3. Drop lowest grade                         ");
-        System.out.println("4. Display grades ");
+        System.out.println("3. Drop lowest grade ");
+        System.out.println("4. Display grades: ");
+        System.out.println("9. Display courses: ");
         System.out.println("5. Sort grades");
         System.out.println("6. Calculate average");
-        System.out.println("7. Exit");
+        System.out.println("7. Estimate your grade ");
+        System.out.println("8. Passing grade ");
+        System.out.println("9. Exit");
         System.out.println("*************************************");
         System.out.println();
     }
@@ -116,6 +125,48 @@ public class GradesClient {
         }
 
     }
+    public void estimatedGPA() {
+    	System.out.println("Enter your test 1 score: ");
+    	String test1Sc = keyboard.next();
+    	System.out.println("Enter your test 2 score: ");
+    	String test2Sc = keyboard.next();
+    	System.out.println("Enter your midtern score: ");
+    	String midtermSc = keyboard.next();
+    	System.out.println("Enter your final score: ");
+    	String finalSc = keyboard.next();
+    	
+    	try {
+    		Double test1 = Double.parseDouble(test1Sc);
+    		Double test2 = Double.parseDouble(test2Sc);
+    		Double midterm = Double.parseDouble(midtermSc);
+    		Double finalS = Double.parseDouble(finalSc);
+    		
+    		System.out.println("Calculating...");
+    		grades.estimatedGPA(test1, test2, midterm, finalS);
+    		
+    		
+    	} catch (NumberFormatException e) {
+    		System.out.println("You did not enter a valid grade: "+e.getMessage());
+    	}
+    	
+    	
+    }
+    public void passingGrade() {
+    	System.out.println("Enter your grade 1: ");
+    	String grade1 = keyboard.next();
+    	System.out.println("Enter your grade 2: ");
+    	String grade2 = keyboard.next();
+    	
+    	try {
+    		Double test1 = Double.parseDouble(grade1);
+    		Double test2 = Double.parseDouble(grade2);
+    		grades.passingGrade(test1, test2);
+    		
+    	} catch (NumberFormatException e) {
+    		System.out.println("You did not enter a valid grade: "+e.getMessage());
+    	}
+    }
+    
 
     private void removeAll()
     {
@@ -152,8 +203,6 @@ public class GradesClient {
     {
         grades.printSortedGrades();
     }
-    private void passingGrades() {
-    	
-    }
+
 
 }
