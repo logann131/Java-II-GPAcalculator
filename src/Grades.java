@@ -124,7 +124,7 @@ public class Grades {
 	    		if (temp >= a) {
 	    			System.out.println("Target average reached\n");
 	    		} else {
-	    			System.out.println("Not sufficient! Added grades!");
+	    			System.out.println("Added grades not sufficent!");
 	    		}
 	    	} else {
 	    		System.out.println("Target average too low");
@@ -133,17 +133,15 @@ public class Grades {
     }
     public Boolean checkValid(double grade) {
     	if (grade >= 0 && grade <= 100) {
-    		return false;
-    	} else {
     		return true;
+    	} else {
+    		return false;    		
     	}
     }
     
 
     public void estimatedGPA(double test1Sc, double test2Sc, double midtermSc, double finalSc) {
-    	if (checkValid(test1Sc) || checkValid(test2Sc) || checkValid(midtermSc) || checkValid(finalSc)) {
-    		System.out.println("Invalid input");
-    	} else {
+    	if (checkValid(test1Sc) && checkValid(test2Sc) && checkValid(midtermSc) && checkValid(finalSc)) {
     		double total = test1Sc + test2Sc + midtermSc + finalSc;
     		double res = total/ 4;
     		
@@ -158,6 +156,9 @@ public class Grades {
     		} else {
     			System.out.println("GPA: percentage - " + res + "! You failed the course!" );
     		}
+    		
+    	} else {
+    		System.out.println("Invalid input");
     	}
     }
     

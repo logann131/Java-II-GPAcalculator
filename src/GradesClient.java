@@ -95,7 +95,6 @@ public class GradesClient {
         System.out.println("2. Remove all grades");
         System.out.println("3. Drop lowest grade ");
         System.out.println("4. Display grades: ");
-        System.out.println("9. Display courses: ");
         System.out.println("5. Sort grades");
         System.out.println("6. Calculate average");
         System.out.println("7. Estimate your grade ");
